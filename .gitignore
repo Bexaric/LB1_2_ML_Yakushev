@@ -1,6 +1,20 @@
 .tpu_8EM51_ML_course
 tpu_8EM51_ML_course/
 
+# DVC локальный кэш
+.dvc/cache
+.dvc/tmp
+
+# Данные (управляются DVC)
+data/*.csv
+data/*.xlsx
+processed/
+
+# Модели и метрики (если не храним в Git)
+models/
+metrics/
+logs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
