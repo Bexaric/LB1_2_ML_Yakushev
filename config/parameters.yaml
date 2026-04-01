@@ -1,0 +1,11 @@
+base:
+  random_state: 42
+  test_size: 0.2
+  root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+
+data:
+  raw_dataset_csv: data/raw/life_expectancy_data.csv
+
+  features_path: data/EDA_processed/life_expectancy_data_new.csv
+  dataset_x_path: data/EDA_processed/data_x.npy
+  dataset_y_path: data/EDA_processed/data_y.npy
