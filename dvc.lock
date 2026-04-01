@@ -1,0 +1,34 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/data/work_dataset.py
+    deps:
+    - path: data/raw/life_expectancy_data.csv
+      hash: md5
+      md5: 5494c8bda501899c3985b137791a6e5b
+      size: 339968
+    - path: src/data/work_dataset.py
+      hash: md5
+      md5: b2febb0842c9b22f52655e6cc8860cad
+      size: 1705
+    outs:
+    - path: data/EDA_processed/data_x.npy
+      hash: md5
+      md5: a06b7bc8b875efab153334060936a761
+      size: 171568
+    - path: data/EDA_processed/data_y.npy
+      hash: md5
+      md5: dee3baa6b1367f1ade03852f67c618c8
+      size: 17272
+    - path: data/EDA_processed/life_expectancy_data_processed.csv
+      hash: md5
+      md5: 38f10ec733195489e665efae41282e00
+      size: 123060
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 23d2a095fd707fdb29866db42ecc2587
+      size: 24701
+    - path: data/EDA_processed/train_data.csv
+      hash: md5
+      md5: 6c935b5a0587d420e8f951de173b3a19
+      size: 98471

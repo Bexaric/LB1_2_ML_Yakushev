@@ -1,0 +1,16 @@
+stages:
+  preprocess:
+    cmd: python src/data/work_dataset.py
+    deps:
+    - data/raw/life_expectancy_data.csv
+    - src/data/work_dataset.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - data
+    outs:
+    - data/EDA_processed/data_x.npy
+    - data/EDA_processed/data_y.npy
+    - data/EDA_processed/life_expectancy_data_processed.csv
+    - data/EDA_processed/test_data.csv
+    - data/EDA_processed/train_data.csv

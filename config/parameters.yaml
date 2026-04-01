@@ -4,8 +4,18 @@ base:
   root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
 
 data:
-  raw_dataset_csv: data/raw/life_expectancy_data.csv
+  dataset_csv: data/raw/life_expectancy_data.csv
+  target: 'Life expectancy'
 
-  features_path: data/EDA_processed/life_expectancy_data_new.csv
+  new_dataset_path: data/EDA_processed/life_expectancy_data_processed.csv
   dataset_x_path: data/EDA_processed/data_x.npy
   dataset_y_path: data/EDA_processed/data_y.npy
+
+  train_path: data/EDA_processed/train_data.csv
+  test_path: data/EDA_processed/test_data.csv
+
+models:
+  models_path: models/
+
+  linear:
+    n_jobs:
