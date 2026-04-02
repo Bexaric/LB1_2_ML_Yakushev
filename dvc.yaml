@@ -14,7 +14,7 @@ stages:
     - data/EDA_processed/life_expectancy_data_processed.csv
     - data/EDA_processed/test_data.csv
     - data/EDA_processed/train_data.csv
-  
+
   LinearRegression:
     cmd: python src/models/LinearRegression.py
     deps:
@@ -28,7 +28,7 @@ stages:
     - models/LinearRegression.pkl
     - reports/LinearRegression_coeff.json
     - reports/images/LinearRegression_coefficients.png
-  
+
   DecisionTree:
     cmd: python src/models/DecisionTree.py
     deps:
@@ -41,7 +41,7 @@ stages:
     outs:
     - models/DecisionTree.pkl
     - reports/images/DecisionTree_structure.png
-  
+
   CatBoost:
     cmd: python src/models/CatBoost.py
     deps:
@@ -54,7 +54,7 @@ stages:
     outs:
     - models/CatBoost.cbm
     - reports/images/CatBoost_feature_importance.png
-  
+
   XGBoost:
     cmd: python src/models/XGBoost.py
     deps:
@@ -85,3 +85,95 @@ stages:
     - reports/images/DenseNeuralNetwork_weights_layer_2.png
     - reports/images/DenseNeuralNetwork_weights_layer_3.png
     - reports/images/DenseNeuralNetwork_weights_layer_4.png
+
+  test_LinearRegression:
+    cmd: python src/test_models/test_LR.py
+    deps:
+    - data/EDA_processed/test_data.csv
+    - models/LinearRegression.pkl
+    - src/test_models/test_LR.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.LinearRegression
+    metrics:
+    - dvclive/LinearRegression/metrics.json
+    plots:
+    - dvclive/LinearRegression/plots
+
+  test_DecisionTree:
+    cmd: python src/test_models/test_DT.py
+    deps:
+    - data/EDA_processed/test_data.csv
+    - models/DecisionTree.pkl
+    - src/test_models/test_DT.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.DecisionTree
+    metrics:
+    - dvclive/DecisionTree/metrics.json
+    plots:
+    - dvclive/DecisionTree/plots
+
+  test_CatBoost:
+    cmd: python src/test_models/test_CB.py
+    deps:
+    - data/EDA_processed/test_data.csv
+    - models/CatBoost.cbm
+    - src/test_models/test_CB.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.CatBoost
+    metrics:
+    - dvclive/CatBoost/metrics.json
+    plots:
+    - dvclive/CatBoost/plots
+
+  test_XGBoost:
+    cmd: python src/test_models/test_XGB.py
+    deps:
+    - data/EDA_processed/test_data.csv
+    - models/XGBoost.json
+    - src/test_models/test_XGB.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.XGBoost
+    metrics:
+    - dvclive/XGBoost/metrics.json
+    plots:
+    - dvclive/XGBoost/plots
+
+  test_DenseNeuralNetwork:
+    cmd: python src/test_models/test_DNN.py
+    deps:
+    - data/EDA_processed/test_data.csv
+    - models/DenseNeuralNetwork.keras
+    - src/test_models/test_DNN.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.DenseNeuralNetwork
+    metrics:
+    - dvclive/DenseNeuralNetwork/metrics.json
+    plots:
+    - dvclive/DenseNeuralNetwork/plots
+metrics:
+- dvclive/LinearRegression/metrics.json
+- dvclive/DecisionTree/metrics.json
+- dvclive/CatBoost/metrics.json
+- dvclive/XGBoost/metrics.json
+- dvclive/DenseNeuralNetwork/metrics.json
+plots:
+- dvclive/LinearRegression/plots/metrics:
+    x: step
+- dvclive/DecisionTree/plots/metrics:
+    x: step
+- dvclive/CatBoost/plots/metrics:
+    x: step
+- dvclive/XGBoost/plots/metrics:
+    x: step
+- dvclive/DenseNeuralNetwork/plots/metrics:
+    x: step

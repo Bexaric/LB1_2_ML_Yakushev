@@ -249,3 +249,206 @@ stages:
       hash: md5
       md5: 3a635ee2e288e82f427d1daa6bf85792
       size: 16019
+  test_LinearRegression:
+    cmd: python src/test_models/test_LR.py
+    deps:
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
+    - path: models/LinearRegression.pkl
+      hash: md5
+      md5: b8ba7935341b279923002d5f60b323de
+      size: 1081
+    - path: src/test_models/test_LR.py
+      hash: md5
+      md5: 30d273268d108c159887dea588745e74
+      size: 1906
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        models.LinearRegression:
+          fit_intercept: true
+          positive: false
+          copy_X: true
+          n_jobs: 3
+    outs:
+    - path: dvclive/LinearRegression/metrics.json
+      hash: md5
+      md5: a8d0b1659e236c73ec67a935e6c07721
+      size: 170
+    - path: dvclive/LinearRegression/plots
+      hash: md5
+      md5: 696701e26421d954f89550d11e746abc.dir
+      size: 127
+      nfiles: 4
+  test_DecisionTree:
+    cmd: python src/test_models/test_DT.py
+    deps:
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
+    - path: models/DecisionTree.pkl
+      hash: md5
+      md5: 183a23c0550182d83ed45ba0f3a9615c
+      size: 2305
+    - path: src/test_models/test_DT.py
+      hash: md5
+      md5: d20421702ee562c34abb2b8fafa5a847
+      size: 1981
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        models.DecisionTree:
+          random_state: 42
+          max_depth: 9
+          min_samples_split: 14
+          min_samples_leaf: 15
+          max_features:
+          ccp_alpha: 0.00037332848919694817
+          criterion: squared_error
+          splitter: best
+    outs:
+    - path: dvclive/DecisionTree/metrics.json
+      hash: md5
+      md5: e8a5fdbc6d9764eb5a85b32cb4658ce9
+      size: 169
+    - path: dvclive/DecisionTree/plots
+      hash: md5
+      md5: bb47dfaa1ff276c7fa3c56670081d06c.dir
+      size: 126
+      nfiles: 4
+  test_CatBoost:
+    cmd: python src/test_models/test_CB.py
+    deps:
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
+    - path: models/CatBoost.cbm
+      hash: md5
+      md5: abe8319f353280806f224b62e2407fac
+      size: 1956888
+    - path: src/test_models/test_CB.py
+      hash: md5
+      md5: a980cbe583cacffbdd8419c08696a465
+      size: 1969
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        models.CatBoost:
+          iterations: 800
+          learning_rate: 0.04022222885366608
+          depth: 6
+          l2_leaf_reg: 0.000216797464861736
+          border_count: 121
+          random_strength: 0.26101610828931443
+          bagging_temperature: 0.11999753068566878
+          grow_policy: Depthwise
+    outs:
+    - path: dvclive/CatBoost/metrics.json
+      hash: md5
+      md5: aa0e8101891fb10413dcf10ae5b7d9c2
+      size: 169
+    - path: dvclive/CatBoost/plots
+      hash: md5
+      md5: 77d7e712e5bef5c6064febf682d8400d.dir
+      size: 126
+      nfiles: 4
+  test_XGBoost:
+    cmd: python src/test_models/test_XGB.py
+    deps:
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
+    - path: models/XGBoost.json
+      hash: md5
+      md5: f9042498d7ae61c319d9caa6bac31cbc
+      size: 4842795
+    - path: src/test_models/test_XGB.py
+      hash: md5
+      md5: 20ac7d969edcb3e74dc6cbe8e2543a6d
+      size: 1956
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        models.XGBoost:
+          n_estimators: 950
+          max_depth: 8
+          learning_rate: 0.02254870392405559
+          subsample: 0.7747887415078325
+          colsample_bytree: 0.5684164328843179
+          gamma: 4.4817944170608675e-05
+          reg_alpha: 0.0023332773853300052
+          reg_lambda: 0.0003025171812085329
+          min_child_weight: 7
+    outs:
+    - path: dvclive/XGBoost/metrics.json
+      hash: md5
+      md5: 57a37b30ad2ffb80f3e7e53d1a676a8a
+      size: 170
+    - path: dvclive/XGBoost/plots
+      hash: md5
+      md5: 420532bacaaa68fa0659291b4b6d895d.dir
+      size: 127
+      nfiles: 4
+  test_DenseNeuralNetwork:
+    cmd: python src/test_models/test_DNN.py
+    deps:
+    - path: data/EDA_processed/test_data.csv
+      hash: md5
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
+    - path: models/DenseNeuralNetwork.keras
+      hash: md5
+      md5: 8ba7314c8ff8d2c2e2b96cce890f51c1
+      size: 115485
+    - path: src/test_models/test_DNN.py
+      hash: md5
+      md5: 6df0f85127345b78f1ca6757f3d36c25
+      size: 1975
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        models.DenseNeuralNetwork:
+          dataset_params:
+            validation_split: 0.2
+            random_state: 42
+          model_params:
+            dropout_rate: 0.0012244354030556855
+            n_layers: 4
+            units: 256
+            preout_neurons: 14
+            learning_rate: 0.0023838948926790528
+            activation: tanh
+            batch_size: 16
+          train_params:
+            epochs: 50
+            verbose: 1
+    outs:
+    - path: dvclive/DenseNeuralNetwork/metrics.json
+      hash: md5
+      md5: 101d9fbda14898f306979206eba7b5e3
+      size: 170
+    - path: dvclive/DenseNeuralNetwork/plots
+      hash: md5
+      md5: ad28e417901a35f55e25478678338cc4.dir
+      size: 127
+      nfiles: 4
