@@ -1,9 +1,8 @@
-# dvc stage add -n preprocess -d data/raw/life_expectancy_data.csv -d src/data/work_dataset.py  -o data/EDA_processed/life_expectancy_data_processed.csv  -o data/EDA_processed/data_x.npy -o data/EDA_processed/data_y.npy  -o data/EDA_processed/test_data.csv -o data/EDA_processed/train_data.csv python src/data/work_dataset.py
 import pandas as pd
 import numpy as np
 import yaml
 
-from sklearn.preprocessing import LabelBinarizer, StandardScaler
+from sklearn.preprocessing import LabelBinarizer, OneHotEncoder, MinMaxScaler
 from sklearn.model_selection import train_test_split
 
 def main():
@@ -28,11 +27,22 @@ def main():
 
     df.dropna(inplace=True)
 
+    target_col = config['data']['target']
+    feature_cols = [col for col in df.columns if col != target_col]
+
+    status_col = 'Status'
+    other_features = [col for col in feature_cols if col != status_col]
+
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+    df[other_features] = scaler.fit_transform(df[other_features])
+
+
     # Третий этап. Сохранение данных
     df.to_csv(config['data']['new_dataset_path'], index=False)
 
-    data_x = np.array(df.drop(config['data']['target'], axis=1))
-    data_y = np.array(df[config['data']['target']])
+    data_x = np.array(df.drop(target_col, axis=1))
+    data_y = np.array(df[target_col])
+    data_y = np.log1p(data_y)
     
     np.save(config['data']['dataset_x_path'], data_x)
     np.save(config['data']['dataset_y_path'], data_y)

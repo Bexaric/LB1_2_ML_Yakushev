@@ -9,26 +9,41 @@ stages:
       size: 339968
     - path: src/data/work_dataset.py
       hash: md5
-      md5: b2febb0842c9b22f52655e6cc8860cad
-      size: 1705
+      md5: 269ebad96586a7bc64e83ed82fab62c0
+      size: 2058
+    params:
+      config/parameters.yaml:
+        base:
+          random_state: 42
+          test_size: 0.2
+          root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
+        data:
+          dataset_csv: data/raw/life_expectancy_data.csv
+          target: Life expectancy
+          new_dataset_path: 
+            data/EDA_processed/life_expectancy_data_processed.csv
+          dataset_x_path: data/EDA_processed/data_x.npy
+          dataset_y_path: data/EDA_processed/data_y.npy
+          train_path: data/EDA_processed/train_data.csv
+          test_path: data/EDA_processed/test_data.csv
     outs:
     - path: data/EDA_processed/data_x.npy
       hash: md5
-      md5: a06b7bc8b875efab153334060936a761
+      md5: 26a6c381927b75e7350f20ff72331813
       size: 171568
     - path: data/EDA_processed/data_y.npy
       hash: md5
-      md5: dee3baa6b1367f1ade03852f67c618c8
+      md5: 0bbe4f34b10afcd108432fd5c90a7c92
       size: 17272
     - path: data/EDA_processed/life_expectancy_data_processed.csv
       hash: md5
-      md5: 38f10ec733195489e665efae41282e00
-      size: 123060
+      md5: 1308bd232306967f653efe075614ad80
+      size: 367327
     - path: data/EDA_processed/test_data.csv
       hash: md5
-      md5: 23d2a095fd707fdb29866db42ecc2587
-      size: 24701
+      md5: 6ec91a80ed7c235671a8b049a9a75611
+      size: 73750
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 6c935b5a0587d420e8f951de173b3a19
-      size: 98471
+      md5: 13f35636f19057ec0facbdbd7b602c85
+      size: 293689

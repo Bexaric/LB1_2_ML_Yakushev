@@ -14,8 +14,66 @@ data:
   train_path: data/EDA_processed/train_data.csv
   test_path: data/EDA_processed/test_data.csv
 
+reports:
+  metrics_path: reports/metrics/
+  images_path: reports/images/
+
 models:
+  optuna:
+    n_trials: 100
+    cv_folds: 3
+
   models_path: models/
 
-  linear:
-    n_jobs:
+  LinearRegression:
+    fit_intercept: True
+    positive: False
+    copy_X: True 
+    n_jobs: 3
+
+  DecisionTree:
+    random_state: 42
+    max_depth: 9
+    min_samples_split: 14
+    min_samples_leaf: 15
+    max_features: null
+    ccp_alpha: 0.00037332848919694817 
+    criterion: squared_error
+    splitter: best
+
+  CatBoost:
+    iterations: 800
+    learning_rate: 0.04022222885366608
+    depth: 6
+    l2_leaf_reg: 0.000216797464861736
+    border_count: 121
+    random_strength: 0.26101610828931443
+    bagging_temperature: 0.11999753068566878
+    grow_policy: 'Depthwise'
+
+  XGBoost:
+    n_estimators: 950
+    max_depth: 8
+    learning_rate: 0.02254870392405559
+    subsample: 0.7747887415078325
+    colsample_bytree: 0.5684164328843179
+    gamma: 4.4817944170608675e-05
+    reg_alpha: 0.0023332773853300052
+    reg_lambda: 0.0003025171812085329
+    min_child_weight: 7
+
+  DenseNeuralNetwork:
+    dataset_params:
+      validation_split: 0.2
+      random_state: 42
+    model_params:
+      dropout_rate: 0.0012244354030556855
+      n_layers: 4
+      units: 256
+      preout_neurons: 14
+      learning_rate: 0.0023838948926790528
+      activation: tanh
+      batch_size: 16
+    train_params:
+      epochs: 50
+      verbose: 1

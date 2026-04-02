@@ -1,3 +1,4 @@
+int.txt
 !*.dvc
 !dvc.lock
 !dvc.yaml
@@ -20,6 +21,8 @@ processed/
 models/
 metrics/
 logs/
+optuna_model/
+test_models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
