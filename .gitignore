@@ -1,18 +1,8 @@
-catboost_info/
-reports/
-dvclive/
-dvc_storage/
 int.txt
 !*.dvc
 !dvc.lock
 !dvc.yaml
 !config/parameters.yaml
-data/raw
-data/EDA_processed
-notebook/EDA_PCA.ipynb
-.tpu_8EM51_ML_course
-tpu_8EM51_ML_course/
-optuna_params/
 
 # DVC локальный кэш
 .dvc/cache
@@ -21,7 +11,6 @@ optuna_params/
 # Данные (управляются DVC)
 data/*.csv
 data/*.xlsx
-EDA_processed/
 
 # Модели и метрики (если не храним в Git)
 models/
@@ -29,6 +18,16 @@ metrics/
 logs/
 optuna_model/
 test_models/
+catboost_info/
+reports/
+dvclive/
+dvc_storage/
+data/raw
+data/EDA_processed
+notebook/EDA_PCA.ipynb
+.tpu_8EM51_ML_course
+tpu_8EM51_ML_course/
+optuna_params/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
