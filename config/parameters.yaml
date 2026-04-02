@@ -15,8 +15,11 @@ data:
   test_path: data/EDA_processed/test_data.csv
 
 reports:
+  coeffs_path: reports/
   metrics_path: reports/metrics/
   images_path: reports/images/
+  dvclive_path: dvclive/
+  optuna_params_path: reports/optuna_params/
 
 models:
   optuna:

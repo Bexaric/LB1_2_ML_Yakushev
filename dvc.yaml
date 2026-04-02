@@ -14,3 +14,74 @@ stages:
     - data/EDA_processed/life_expectancy_data_processed.csv
     - data/EDA_processed/test_data.csv
     - data/EDA_processed/train_data.csv
+  
+  LinearRegression:
+    cmd: python src/models/LinearRegression.py
+    deps:
+    - data/EDA_processed/train_data.csv
+    - src/models/LinearRegression.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.LinearRegression
+    outs:
+    - models/LinearRegression.pkl
+    - reports/LinearRegression_coeff.json
+    - reports/images/LinearRegression_coefficients.png
+  
+  DecisionTree:
+    cmd: python src/models/DecisionTree.py
+    deps:
+    - data/EDA_processed/train_data.csv
+    - src/models/DecisionTree.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.DecisionTree
+    outs:
+    - models/DecisionTree.pkl
+    - reports/images/DecisionTree_structure.png
+  
+  CatBoost:
+    cmd: python src/models/CatBoost.py
+    deps:
+    - data/EDA_processed/train_data.csv
+    - src/models/CatBoost.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.CatBoost
+    outs:
+    - models/CatBoost.cbm
+    - reports/images/CatBoost_feature_importance.png
+  
+  XGBoost:
+    cmd: python src/models/XGBoost.py
+    deps:
+    - data/EDA_processed/train_data.csv
+    - src/models/XGBoost.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.XGBoost
+    outs:
+    - models/XGBoost.json
+    - reports/images/XGBoost_feature_importance.png
+
+  DenseNeuralNetwork:
+    cmd: python src/models/DenseNeuralNetwork.py
+    deps:
+    - data/EDA_processed/train_data.csv
+    - src/models/DenseNeuralNetwork.py
+    params:
+    - config/parameters.yaml:
+      - base
+      - models.DenseNeuralNetwork
+    outs:
+    - models/DenseNeuralNetwork.keras
+    - reports/images/DenseNeuralNetwork_loss_curve.png
+    - reports/images/DenseNeuralNetwork_model_graph.png
+    - reports/images/DenseNeuralNetwork_weights_layer_1.png
+    - reports/images/DenseNeuralNetwork_weights_layer_2.png
+    - reports/images/DenseNeuralNetwork_weights_layer_3.png
+    - reports/images/DenseNeuralNetwork_weights_layer_4.png
