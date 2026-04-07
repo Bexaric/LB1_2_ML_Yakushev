@@ -29,54 +29,43 @@ models:
   models_path: models/
 
   LinearRegression:
-    fit_intercept: True
-    positive: False
-    copy_X: True 
-    n_jobs: 3
+    fit_intercept: True         # Наличие или отсутствие свободного члена в модели
+    positive: False             # При True только положительные коэффициенты в модели
+    tol: 8.691979324081625e-07  # Допустимость критериев остановки
 
   DecisionTree:
-    random_state: 42
-    max_depth: 9
-    min_samples_split: 14
-    min_samples_leaf: 15
-    max_features: null
-    ccp_alpha: 0.00037332848919694817 
-    criterion: squared_error
-    splitter: best
+    random_state: 42                  # Управляет случайностью оценки
+    max_depth: 46                     # Максимальная глубина дерева
+    min_samples_split: 3              # Минимальное количество выборок, необходимое для разделения внутреннего узла
+    min_samples_leaf: 2               # Минимальное число объектов в листе
+    max_features: 11                  # Число признаков для построения одного дерева
+    ccp_alpha: 1.6148807499211317e-06 # Параметр сложности, используемый для обрезки по минимальной стоимости-сложности
+    criterion: friedman_mse           # Функция для оценки качества разделения
+    splitter: random                  # Стратегия, используемая для выбора способа разделения в каждом узле
 
   CatBoost:
-    iterations: 800
-    learning_rate: 0.04022222885366608
-    depth: 6
-    l2_leaf_reg: 0.000216797464861736
-    border_count: 121
-    random_strength: 0.26101610828931443
-    bagging_temperature: 0.11999753068566878
-    grow_policy: 'Depthwise'
+    iterations: 775                          # Максимальное количество построенных деревьев
+    learning_rate: 0.03251619490857449       # Скорость обучения (шаг градиента)
+    depth: 10                                # Глубина дерева
+    loss_function: RMSE                      # Метрика , используемая в процессе обучения
+    grow_policy: Lossguide                   # Определяет, как будет применяться жадный алгоритм поиска
 
   XGBoost:
-    n_estimators: 950
-    max_depth: 8
-    learning_rate: 0.02254870392405559
-    subsample: 0.7747887415078325
-    colsample_bytree: 0.5684164328843179
-    gamma: 4.4817944170608675e-05
-    reg_alpha: 0.0023332773853300052
-    reg_lambda: 0.0003025171812085329
-    min_child_weight: 7
+    n_estimators: 610                   # Количество деревьев
+    max_depth: 14                       # Максимальная глубина дерева
+    learning_rate: 0.060040896394708304 # Скорость обучения (шаг градиентного спуска)
+    min_child_weight: 15                # Минимальная сумма весов (или количество образцов) в листе
 
   DenseNeuralNetwork:
     dataset_params:
-      validation_split: 0.2
-      random_state: 42
+      validation_split: 0.2                # Доля обучающей выборки, выделяемая для валидации
+      random_state: 42                     # Фиксация случайности при разбиении данных
     model_params:
-      dropout_rate: 0.0012244354030556855
-      n_layers: 4
-      units: 256
-      preout_neurons: 14
-      learning_rate: 0.0023838948926790528
-      activation: tanh
-      batch_size: 16
+      dropout_rate: 0.0038113471432177325  # Вероятность "выключения" нейрона в слоях Dropout
+      n_layers: 5                          # Количество скрытых полносвязных слоёв в сети
+      preout_neurons: 32                   # Базовое количество нейронов для расчёта размерности слоёв.
+      learning_rate: 0.004761536180063235  # Скорость обучения оптимизатора Adam.
+      activation: relu                     # Функция активации для скрытых слоёв
     train_params:
-      epochs: 50
-      verbose: 1
+      epochs: 90                          # Количество полных проходов всего обучающего набора через сеть
+      verbose: 1                           # Вывод метрик

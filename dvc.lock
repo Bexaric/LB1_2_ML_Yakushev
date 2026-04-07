@@ -67,12 +67,11 @@ stages:
         models.LinearRegression:
           fit_intercept: true
           positive: false
-          copy_X: true
-          n_jobs: 3
+          tol: 8.691979324081625e-07
     outs:
     - path: models/LinearRegression.pkl
       hash: md5
-      md5: b8ba7935341b279923002d5f60b323de
+      md5: b58e2bc07ef6b66cac9fc2d3eefea35a
       size: 1081
     - path: reports/LinearRegression_coeff.json
       hash: md5
@@ -91,7 +90,7 @@ stages:
       size: 293689
     - path: src/models/DecisionTree.py
       hash: md5
-      md5: 82100a0eaf8c24b910cb1a0a353634b9
+      md5: 7cdb983777756c7978331539dfe526eb
       size: 1129
     params:
       config/parameters.yaml:
@@ -101,22 +100,22 @@ stages:
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DecisionTree:
           random_state: 42
-          max_depth: 9
-          min_samples_split: 14
-          min_samples_leaf: 15
-          max_features:
-          ccp_alpha: 0.00037332848919694817
-          criterion: squared_error
-          splitter: best
+          max_depth: 46
+          min_samples_split: 3
+          min_samples_leaf: 2
+          max_features: 11
+          ccp_alpha: 1.6148807499211317e-06
+          criterion: friedman_mse
+          splitter: random
     outs:
     - path: models/DecisionTree.pkl
       hash: md5
-      md5: 183a23c0550182d83ed45ba0f3a9615c
-      size: 2305
+      md5: 825bd8e3cdc9d6320f9df82e49dc1b43
+      size: 36289
     - path: reports/images/DecisionTree_structure.png
       hash: md5
-      md5: efa578510359a0a76dcc78d16cf82a34
-      size: 492090
+      md5: 51217bbe9bdffd0fe5c56b542310f14d
+      size: 273925
   CatBoost:
     cmd: python src/models/CatBoost.py
     deps:
@@ -135,23 +134,20 @@ stages:
           test_size: 0.2
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.CatBoost:
-          iterations: 800
-          learning_rate: 0.04022222885366608
-          depth: 6
-          l2_leaf_reg: 0.000216797464861736
-          border_count: 121
-          random_strength: 0.26101610828931443
-          bagging_temperature: 0.11999753068566878
-          grow_policy: Depthwise
+          iterations: 775
+          learning_rate: 0.03251619490857449
+          depth: 10
+          loss_function: RMSE
+          grow_policy: Lossguide
     outs:
     - path: models/CatBoost.cbm
       hash: md5
-      md5: abe8319f353280806f224b62e2407fac
-      size: 1956888
+      md5: 17fd580db1dc0e02480196e1cab6f56c
+      size: 1034072
     - path: reports/images/CatBoost_feature_importance.png
       hash: md5
-      md5: 20f77385efce507459423121d0d4e874
-      size: 7366
+      md5: bdc998fd2f255105b176ba68ec84cc95
+      size: 7347
   XGBoost:
     cmd: python src/models/XGBoost.py
     deps:
@@ -170,24 +166,19 @@ stages:
           test_size: 0.2
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.XGBoost:
-          n_estimators: 950
-          max_depth: 8
-          learning_rate: 0.02254870392405559
-          subsample: 0.7747887415078325
-          colsample_bytree: 0.5684164328843179
-          gamma: 4.4817944170608675e-05
-          reg_alpha: 0.0023332773853300052
-          reg_lambda: 0.0003025171812085329
-          min_child_weight: 7
+          n_estimators: 610
+          max_depth: 14
+          learning_rate: 0.060040896394708304
+          min_child_weight: 15
     outs:
     - path: models/XGBoost.json
       hash: md5
-      md5: f9042498d7ae61c319d9caa6bac31cbc
-      size: 4842795
+      md5: 35c748b7240af628e0579fcfd2071c05
+      size: 3416134
     - path: reports/images/XGBoost_feature_importance.png
       hash: md5
-      md5: dbbca0920d6f587a044b0929980cde4e
-      size: 6557
+      md5: 3c6db349d84b57b3c23617e3580170df
+      size: 8790
   DenseNeuralNetwork:
     cmd: python src/models/DenseNeuralNetwork.py
     deps:
@@ -197,8 +188,8 @@ stages:
       size: 293689
     - path: src/models/DenseNeuralNetwork.py
       hash: md5
-      md5: 45e9b26e84856805276fa011e7da827a
-      size: 5421
+      md5: 64519910a5ecdf94b1befe821da47941
+      size: 5173
     params:
       config/parameters.yaml:
         base:
@@ -210,45 +201,43 @@ stages:
             validation_split: 0.2
             random_state: 42
           model_params:
-            dropout_rate: 0.0012244354030556855
-            n_layers: 4
-            units: 256
-            preout_neurons: 14
-            learning_rate: 0.0023838948926790528
-            activation: tanh
-            batch_size: 16
+            dropout_rate: 0.0038113471432177325
+            n_layers: 5
+            preout_neurons: 32
+            learning_rate: 0.004761536180063235
+            activation: relu
           train_params:
-            epochs: 50
+            epochs: 90
             verbose: 1
     outs:
     - path: models/DenseNeuralNetwork.keras
       hash: md5
-      md5: 8ba7314c8ff8d2c2e2b96cce890f51c1
-      size: 115485
+      md5: f95bbbe122eac4cd52c0066b1a38a487
+      size: 568961
     - path: reports/images/DenseNeuralNetwork_loss_curve.png
       hash: md5
-      md5: 5447cb3c0f9a6c7a0a091fb5646d5884
-      size: 21976
+      md5: 3b00b773b14fe0be387595755a012fe6
+      size: 23219
     - path: reports/images/DenseNeuralNetwork_model_graph.png
       hash: md5
-      md5: 4811c3a6c0d0faae349ce8a0f598fa34
-      size: 680756
+      md5: 2039f703afc94ff9fd8364875aeae753
+      size: 581263
     - path: reports/images/DenseNeuralNetwork_weights_layer_1.png
       hash: md5
-      md5: be6337575f3fb9b5c5ea3f573f9e2844
-      size: 17515
+      md5: 7ebdd596fe8cafb782e6d497ae8a2e3f
+      size: 18019
     - path: reports/images/DenseNeuralNetwork_weights_layer_2.png
       hash: md5
-      md5: 3ca3346cd9fd68f035e020117fcdc1e1
-      size: 17218
+      md5: 1af9bb161b77ae20f0c3b80953a79452
+      size: 19107
     - path: reports/images/DenseNeuralNetwork_weights_layer_3.png
       hash: md5
-      md5: 09fae4319b64a0cac937a679b455d96b
-      size: 16573
+      md5: 688c3c29a3dcfe0a2ab4a3c78c0f0621
+      size: 19137
     - path: reports/images/DenseNeuralNetwork_weights_layer_4.png
       hash: md5
-      md5: 3a635ee2e288e82f427d1daa6bf85792
-      size: 16019
+      md5: 0f209b69c0fdd786c5d1d89dd5d219e7
+      size: 18002
   test_LinearRegression:
     cmd: python src/test_models/test_LR.py
     deps:
@@ -258,7 +247,7 @@ stages:
       size: 73750
     - path: models/LinearRegression.pkl
       hash: md5
-      md5: b8ba7935341b279923002d5f60b323de
+      md5: b58e2bc07ef6b66cac9fc2d3eefea35a
       size: 1081
     - path: src/test_models/test_LR.py
       hash: md5
@@ -273,8 +262,7 @@ stages:
         models.LinearRegression:
           fit_intercept: true
           positive: false
-          copy_X: true
-          n_jobs: 3
+          tol: 8.691979324081625e-07
     outs:
     - path: dvclive/LinearRegression/metrics.json
       hash: md5
@@ -294,8 +282,8 @@ stages:
       size: 73750
     - path: models/DecisionTree.pkl
       hash: md5
-      md5: 183a23c0550182d83ed45ba0f3a9615c
-      size: 2305
+      md5: 825bd8e3cdc9d6320f9df82e49dc1b43
+      size: 36289
     - path: src/test_models/test_DT.py
       hash: md5
       md5: d20421702ee562c34abb2b8fafa5a847
@@ -308,22 +296,22 @@ stages:
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DecisionTree:
           random_state: 42
-          max_depth: 9
-          min_samples_split: 14
-          min_samples_leaf: 15
-          max_features:
-          ccp_alpha: 0.00037332848919694817
-          criterion: squared_error
-          splitter: best
+          max_depth: 46
+          min_samples_split: 3
+          min_samples_leaf: 2
+          max_features: 11
+          ccp_alpha: 1.6148807499211317e-06
+          criterion: friedman_mse
+          splitter: random
     outs:
     - path: dvclive/DecisionTree/metrics.json
       hash: md5
-      md5: e8a5fdbc6d9764eb5a85b32cb4658ce9
-      size: 169
+      md5: 3e6255bc0409554cefd27e96134cd300
+      size: 170
     - path: dvclive/DecisionTree/plots
       hash: md5
-      md5: bb47dfaa1ff276c7fa3c56670081d06c.dir
-      size: 126
+      md5: b01a66c44010eda869b20a31dc0b9e7d.dir
+      size: 127
       nfiles: 4
   test_CatBoost:
     cmd: python src/test_models/test_CB.py
@@ -334,8 +322,8 @@ stages:
       size: 73750
     - path: models/CatBoost.cbm
       hash: md5
-      md5: abe8319f353280806f224b62e2407fac
-      size: 1956888
+      md5: 17fd580db1dc0e02480196e1cab6f56c
+      size: 1034072
     - path: src/test_models/test_CB.py
       hash: md5
       md5: a980cbe583cacffbdd8419c08696a465
@@ -347,23 +335,20 @@ stages:
           test_size: 0.2
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.CatBoost:
-          iterations: 800
-          learning_rate: 0.04022222885366608
-          depth: 6
-          l2_leaf_reg: 0.000216797464861736
-          border_count: 121
-          random_strength: 0.26101610828931443
-          bagging_temperature: 0.11999753068566878
-          grow_policy: Depthwise
+          iterations: 775
+          learning_rate: 0.03251619490857449
+          depth: 10
+          loss_function: RMSE
+          grow_policy: Lossguide
     outs:
     - path: dvclive/CatBoost/metrics.json
       hash: md5
-      md5: aa0e8101891fb10413dcf10ae5b7d9c2
-      size: 169
+      md5: 49e9007bc9988a413d2ef9fcc5cbb25b
+      size: 171
     - path: dvclive/CatBoost/plots
       hash: md5
-      md5: 77d7e712e5bef5c6064febf682d8400d.dir
-      size: 126
+      md5: 0a1ea53e71de4c01ef69f6589c97af0e.dir
+      size: 128
       nfiles: 4
   test_XGBoost:
     cmd: python src/test_models/test_XGB.py
@@ -374,8 +359,8 @@ stages:
       size: 73750
     - path: models/XGBoost.json
       hash: md5
-      md5: f9042498d7ae61c319d9caa6bac31cbc
-      size: 4842795
+      md5: 35c748b7240af628e0579fcfd2071c05
+      size: 3416134
     - path: src/test_models/test_XGB.py
       hash: md5
       md5: 20ac7d969edcb3e74dc6cbe8e2543a6d
@@ -387,24 +372,19 @@ stages:
           test_size: 0.2
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.XGBoost:
-          n_estimators: 950
-          max_depth: 8
-          learning_rate: 0.02254870392405559
-          subsample: 0.7747887415078325
-          colsample_bytree: 0.5684164328843179
-          gamma: 4.4817944170608675e-05
-          reg_alpha: 0.0023332773853300052
-          reg_lambda: 0.0003025171812085329
-          min_child_weight: 7
+          n_estimators: 610
+          max_depth: 14
+          learning_rate: 0.060040896394708304
+          min_child_weight: 15
     outs:
     - path: dvclive/XGBoost/metrics.json
       hash: md5
-      md5: 57a37b30ad2ffb80f3e7e53d1a676a8a
-      size: 170
+      md5: bf0cba271b699a913bd701a05757de55
+      size: 169
     - path: dvclive/XGBoost/plots
       hash: md5
-      md5: 420532bacaaa68fa0659291b4b6d895d.dir
-      size: 127
+      md5: 2926148db4f678320e717774f11000dc.dir
+      size: 126
       nfiles: 4
   test_DenseNeuralNetwork:
     cmd: python src/test_models/test_DNN.py
@@ -415,8 +395,8 @@ stages:
       size: 73750
     - path: models/DenseNeuralNetwork.keras
       hash: md5
-      md5: 8ba7314c8ff8d2c2e2b96cce890f51c1
-      size: 115485
+      md5: f95bbbe122eac4cd52c0066b1a38a487
+      size: 568961
     - path: src/test_models/test_DNN.py
       hash: md5
       md5: 6df0f85127345b78f1ca6757f3d36c25
@@ -432,23 +412,21 @@ stages:
             validation_split: 0.2
             random_state: 42
           model_params:
-            dropout_rate: 0.0012244354030556855
-            n_layers: 4
-            units: 256
-            preout_neurons: 14
-            learning_rate: 0.0023838948926790528
-            activation: tanh
-            batch_size: 16
+            dropout_rate: 0.0038113471432177325
+            n_layers: 5
+            preout_neurons: 32
+            learning_rate: 0.004761536180063235
+            activation: relu
           train_params:
-            epochs: 50
+            epochs: 90
             verbose: 1
     outs:
     - path: dvclive/DenseNeuralNetwork/metrics.json
       hash: md5
-      md5: 101d9fbda14898f306979206eba7b5e3
-      size: 170
+      md5: 4c2d4f712d34b6b3b1275a5d7772e68d
+      size: 169
     - path: dvclive/DenseNeuralNetwork/plots
       hash: md5
-      md5: ad28e417901a35f55e25478678338cc4.dir
-      size: 127
+      md5: 43857667b99c6b1dd975be248ff29e83.dir
+      size: 126
       nfiles: 4

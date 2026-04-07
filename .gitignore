@@ -14,13 +14,12 @@ data/*.xlsx
 
 # Модели и метрики (если не храним в Git)
 models/
+!src/models/
 metrics/
 logs/
 optuna_model/
-test_models/
 catboost_info/
 reports/
-dvclive/
 dvc_storage/
 data/raw
 data/EDA_processed
