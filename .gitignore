@@ -19,7 +19,6 @@ metrics/
 logs/
 optuna_model/
 catboost_info/
-reports/
 dvc_storage/
 data/raw
 data/EDA_processed
