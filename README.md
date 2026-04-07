@@ -302,7 +302,7 @@ DecisionTree:
 
 Для **дерева решений** была построена диаграмма с первыми узлами дерева решений.
 
-![Дерево_решений_Структура](reports\images\DecisionTree_structure.png)
+![Дерево_решений_Структура](reports/images/DecisionTree_structure.png)
 
 #### **CatBoost** от *Yandex* (**[CatBoost.py](src/models/CatBoost.py)**)
 
@@ -322,7 +322,7 @@ CatBoost:
 
 Для **CatBoost** была построена диаграмма важности признаков.
 
-![CatBoost_Влияние_Признаков](reports\images\CatBoost_feature_importance.png)
+![CatBoost_Влияние_Признаков](reports/images/CatBoost_feature_importance.png)
 
 #### **XGBoost** от *University of Washington* (**[XGBoost.py](src/models/XGBoost.py)**)
 
@@ -341,7 +341,7 @@ XGBoost:
 
 Для **XGBoost** была построена диаграмма важности признаков.
 
-![XGBoost_Влияние_Признаков](reports\images\XGBoost_feature_importance.png)
+![XGBoost_Влияние_Признаков](reports/images/XGBoost_feature_importance.png)
 
 #### **DenseNeuralNetwork** (**[DenseNeuralNetwork.py](src/models/DenseNeuralNetwork.py)**)
 
@@ -409,7 +409,7 @@ dvclive\DenseNeuralNetwork\metrics.json  2.0843      10.02585    0.90085    3.16
 |------------------------|---------|----------|--------|---------|
 | LinearRegression       | 3.25889 | 20.03264 | 0.8019 | 4.47578 |
 | DecisionTree           | 1.89226 | 7.39381  | 0.92688| 2.71916 |
-| **CatBoost**               | **1.25136** | **3.84158**  | **0.96201** | **1.95999** |
+| **CatBoost**           | **1.25136** | **3.84158**  | **0.96201** | **1.95999** |
 | XGBoost                | 1.3408  | 4.77262  | 0.9528 | 2.18463 |
 | DenseNeuralNetwork     | 2.0843  | 10.02585 | 0.90085| 3.16636 |
 
