@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import yaml
 
-from sklearn.preprocessing import LabelBinarizer, OneHotEncoder, MinMaxScaler
+from sklearn.preprocessing import LabelBinarizer, MinMaxScaler
 from sklearn.model_selection import train_test_split
 
 def main():
@@ -42,21 +42,25 @@ def main():
 
     data_x = np.array(df.drop(target_col, axis=1))
     data_y = np.array(df[target_col])
-    data_y = np.log1p(data_y)
     
     np.save(config['data']['dataset_x_path'], data_x)
     np.save(config['data']['dataset_y_path'], data_y)
-    
-    train_df, test_df = train_test_split(
+
+    train_val_df, test_df = train_test_split(
         df,
         test_size=config['base']['test_size'],
         random_state=config['base']['random_state']
     )
-
+    
+    train_df, val_df = train_test_split(
+        train_val_df,
+        test_size=config['base']['val_size'],                    
+        random_state=config['base']['random_state']
+    )
+    
     train_df.to_csv(config['data']['train_path'], index=False)
+    val_df.to_csv(config['data']['val_path'], index=False) 
     test_df.to_csv(config['data']['test_path'], index=False)
-
-    return 0
 
 if __name__ == '__main__':
     main()

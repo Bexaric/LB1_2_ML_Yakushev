@@ -5,6 +5,7 @@
 **Студент:** Якушев Никита Евгеньевич  
 **Группа:** 8EM51  
 **Преподаватель:** Александр Павловский    
+**Версия Python:** 3.10.10 
 
 ## 1. Цель и задачи работы
 
@@ -380,6 +381,8 @@ DenseNeuralNetwork:
 
 ![DenseNeuralNetwork_Layer4](reports/images/DenseNeuralNetwork_weights_layer_4.png)
 
+![DenseNeuralNetwork_Weights_Hist](reports/images/DenseNeuralNetwork_Weights_Hist.png)
+
 ### 5.5 Итоги тестирования моделей
 
 После выполнения `dvc repro` и серии экспериментов были получены следующие метрики на тестовой выборке (20% от исходных данных).
@@ -395,23 +398,162 @@ DVC выводит следующие метрики:
 - **RMSE (Root Mean Squared Error)** — корень из MSE (среднеквадратическое отклонение ошибки). Имеет размерность целевой переменной. Чем меньше, тем лучше.
 - **R² (R-squared, коэффициент детерминации)** — доля дисперсии целевой переменной, объяснённая моделью. Максимум = 1 (идеальное предсказание), может быть отрицательным (хуже, чем просто среднее).
 
-Результат выводится в консоль со следующим текстом:
-```bash
-Path                                     test.mae    test.mse    test.r2    test.rmse
-dvclive\LinearRegression\metrics.json    3.25889     20.03264    0.8019     4.47578
-dvclive\DecisionTree\metrics.json        1.89226     7.39381     0.92688    2.71916
-dvclive\CatBoost\metrics.json            1.25136     3.84158     0.96201    1.95999
-dvclive\XGBoost\metrics.json             1.3408      4.77262     0.9528     2.18463
-dvclive\DenseNeuralNetwork\metrics.json  2.0843      10.02585    0.90085    3.16636
-```
+#### Тренировочные метрики
 
-| Model                  | MAE     | MSE      | R2     | RMSE    |
-|------------------------|---------|----------|--------|---------|
-| LinearRegression       | 3.25889 | 20.03264 | 0.8019 | 4.47578 |
-| DecisionTree           | 1.89226 | 7.39381  | 0.92688| 2.71916 |
-| **CatBoost**           | **1.25136** | **3.84158**  | **0.96201** | **1.95999** |
-| XGBoost                | 1.3408  | 4.77262  | 0.9528 | 2.18463 |
-| DenseNeuralNetwork     | 2.0843  | 10.02585 | 0.90085| 3.16636 |
+| Path | MAE | MSE | R² | RMSE |
+|------|-----|-----|-----|------|
+| `dvclive\LinearRegression\metrics.json` | 3.07372 | 15.23853 | 0.83794 | 3.90366 |
+| `dvclive\DecisionTree\metrics.json` | 0.99242 | 1.93537 | 0.97942 | 1.39117 |
+| `dvclive\CatBoost\metrics.json` | 0.37366 | 0.26488 | 0.99718 | 0.51467 |
+| `dvclive\XGBoost\metrics.json` | 0.11706 | 0.03114 | 0.99967 | 0.17646 |
+| `dvclive\DenseNeuralNetwork\metrics.json` | 2.03296 | 7.28576 | 0.92252 | 2.69921 |
+
+#### Валидационные метрики
+
+| Path | MAE | MSE | R² | RMSE |
+|------|-----|-----|-----|------|
+| `dvclive\LinearRegression\metrics.json` | 3.30597 | 19.77342 | 0.77481 | 4.44673 |
+| `dvclive\DecisionTree\metrics.json` | 1.77834 | 7.14478 | 0.91863 | 2.67297 |
+| `dvclive\CatBoost\metrics.json` | 1.28711 | 3.72301 | 0.95760 | 1.92951 |
+| `dvclive\XGBoost\metrics.json` | 1.40461 | 4.66815 | 0.94684 | 2.16059 |
+| `dvclive\DenseNeuralNetwork\metrics.json` | 2.35907 | 11.80853 | 0.86552 | 3.43635 |
+
+#### Тестовые метрики
+
+| Path | MAE | MSE | R² | RMSE |
+|------|-----|-----|-----|------|
+| `dvclive\LinearRegression\metrics.json` | 3.29466 | 20.67795 | 0.79551 | 4.5473 |
+| `dvclive\DecisionTree\metrics.json` | 1.97876 | 9.13962 | 0.90962 | 3.02318 |
+| `dvclive\CatBoost\metrics.json` | 1.39701 | 4.67981 | 0.95372 | 2.16329 |
+| `dvclive\XGBoost\metrics.json` | 1.41174 | 5.33943 | 0.94720 | 2.31072 |
+| `dvclive\DenseNeuralNetwork\metrics.json` | 2.42316 | 12.79293 | 0.87349 | 3.57672 |
+
+#### Сводная таблица метрик по всем выборкам
+
+<table>
+  <thead>
+    <tr>
+      <th>Модель</th>
+      <th>Данные</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>R²</th>
+      <th>RMSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">LinearRegression</td>
+      <td>train</td>
+      <td>3.07372</td>
+      <td>15.23853</td>
+      <td>0.83794</td>
+      <td>3.90366</td>
+    </tr>
+    <tr>
+      <td>validation</td>
+      <td>3.30597</td>
+      <td>19.77342</td>
+      <td>0.77481</td>
+      <td>4.44673</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>3.29466</td>
+      <td>20.67795</td>
+      <td>0.79551</td>
+      <td>4.5473</td>
+    </tr>
+    <tr>
+      <td rowspan="3">DecisionTree</td>
+      <td>train</td>
+      <td>0.99242</td>
+      <td>1.93537</td>
+      <td>0.97942</td>
+      <td>1.39117</td>
+    </tr>
+    <tr>
+      <td>validation</td>
+      <td>1.77834</td>
+      <td>7.14478</td>
+      <td>0.91863</td>
+      <td>2.67297</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>1.97876</td>
+      <td>9.13962</td>
+      <td>0.90962</td>
+      <td>3.02318</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>CatBoost</strong></td>
+      <td><strong>train</strong></td>
+      <td><strong>0.37366</strong></td>
+      <td><strong>0.26488</strong></td>
+      <td><strong>0.99718</strong></td>
+      <td><strong>0.51467</strong></td>
+    </tr>
+    <tr>
+      <td><strong>validation</strong></td>
+      <td><strong>1.28711</strong></td>
+      <td><strong>3.72301</strong></td>
+      <td><strong>0.95760</strong></td>
+      <td><strong>1.92951</strong></td>
+    </tr>
+    <tr>
+      <td><strong>test</strong></td>
+      <td><strong>1.39701</strong></td>
+      <td><strong>4.67981</strong></td>
+      <td><strong>0.95372</strong></td>
+      <td><strong>2.16329</strong></td>
+    </tr>
+    <tr>
+      <td rowspan="3">XGBoost</td>
+      <td>train</td>
+      <td>0.11706</td>
+      <td>0.03114</td>
+      <td>0.99967</td>
+      <td>0.17646</td>
+    </tr>
+    <tr>
+      <td>validation</td>
+      <td>1.40461</td>
+      <td>4.66815</td>
+      <td>0.94684</td>
+      <td>2.16059</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>1.41174</td>
+      <td>5.33943</td>
+      <td>0.94720</td>
+      <td>2.31072</td>
+    </tr>
+    <tr>
+      <td rowspan="3">DenseNeuralNetwork</td>
+      <td>train</td>
+      <td>2.03296</td>
+      <td>7.28576</td>
+      <td>0.92252</td>
+      <td>2.69921</td>
+    </tr>
+    <tr>
+      <td>validation</td>
+      <td>2.35907</td>
+      <td>11.80853</td>
+      <td>0.86552</td>
+      <td>3.43635</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>2.42316</td>
+      <td>12.79293</td>
+      <td>0.87349</td>
+      <td>3.57672</td>
+    </tr>
+  </tbody>
+</table>
 
 Также все метрики можно представить в виде **HTML-отчёта с графиками DVC**. Для этого нужно написать следующую команду:
 

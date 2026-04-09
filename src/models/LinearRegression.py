@@ -5,26 +5,27 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
-def main():
-    # 
-    with open('config/parameters.yaml', 'r') as config_file:
-        config = yaml.safe_load(config_file)
-
-    # Load data
+def work_with_dataset(config):
     data_train = pd.read_csv(config["data"]["train_path"])
 
     x_train = data_train.drop(columns=config["data"]["target"])
-    y_train = data_train[config["data"]["target"]]
+    y_train = data_train[config["data"]["target"]] 
 
     y_train_log = np.log1p(y_train)
 
-    # Load model params
+    return x_train, y_train_log
+
+def main():
+    with open('config/parameters.yaml', 'r') as config_file:
+        config = yaml.safe_load(config_file)
+
+    x_train, y_train_log = work_with_dataset(config)
+
     params = config['models']['LinearRegression']
     
     model = LinearRegression(**params)
     model.fit(x_train, y_train_log)
 
-    # Log coefficients
     coef_dict = {f"coef_{i}": float(v) for i, v in enumerate(model.coef_)}
 
     with open(config["reports"]["coeffs_path"] + "LinearRegression_coeff.json", "w") as f:

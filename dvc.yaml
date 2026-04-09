@@ -166,6 +166,11 @@ metrics:
 - dvclive/CatBoost/metrics.json
 - dvclive/XGBoost/metrics.json
 - dvclive/DenseNeuralNetwork/metrics.json
+- dvclive/LinearRegression/metrics.json
+- dvclive/DecisionTree/metrics.json
+- dvclive/CatBoost/metrics.json
+- dvclive/XGBoost/metrics.json
+- dvclive/DenseNeuralNetwork/metrics.json
 plots:
 - dvclive/LinearRegression/plots/metrics:
     x: step
@@ -177,3 +182,26 @@ plots:
     x: step
 - dvclive/DenseNeuralNetwork/plots/metrics:
     x: step
+- dvclive/LinearRegression/plots/metrics:
+    x: step
+- dvclive/DecisionTree/plots/metrics:
+    x: step
+- dvclive/CatBoost/plots/metrics:
+    x: step
+- dvclive/XGBoost/plots/metrics:
+    x: step
+- dvclive/DenseNeuralNetwork/plots/metrics:
+    x: step
+artifacts:
+  LinearRegression_metrics:
+    path: reports/metrics/LinearRegression_metrics.json
+    type: metrics
+  CatBoost_metrics:
+    path: reports/metrics/CatBoost_metrics.json
+    type: metrics
+  XGBoost_metrics:
+    path: reports/metrics/XGBoost_metrics.json
+    type: metrics
+  DenseNeuralNetwork_metrics:
+    path: reports/metrics/DenseNeuralNetwork_metrics.json
+    type: metrics

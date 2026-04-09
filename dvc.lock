@@ -9,13 +9,14 @@ stages:
       size: 339968
     - path: src/data/work_dataset.py
       hash: md5
-      md5: 269ebad96586a7bc64e83ed82fab62c0
-      size: 2058
+      md5: 23aa10318e0ea357fcfbf77073643f10
+      size: 2259
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         data:
           dataset_csv: data/raw/life_expectancy_data.csv
@@ -25,6 +26,7 @@ stages:
           dataset_x_path: data/EDA_processed/data_x.npy
           dataset_y_path: data/EDA_processed/data_y.npy
           train_path: data/EDA_processed/train_data.csv
+          val_path: data/EDA_processed/val_data.csv
           test_path: data/EDA_processed/test_data.csv
     outs:
     - path: data/EDA_processed/data_x.npy
@@ -33,7 +35,7 @@ stages:
       size: 171568
     - path: data/EDA_processed/data_y.npy
       hash: md5
-      md5: 0bbe4f34b10afcd108432fd5c90a7c92
+      md5: dee3baa6b1367f1ade03852f67c618c8
       size: 17272
     - path: data/EDA_processed/life_expectancy_data_processed.csv
       hash: md5
@@ -45,24 +47,25 @@ stages:
       size: 73750
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
   LinearRegression:
     cmd: python src/models/LinearRegression.py
     deps:
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
     - path: src/models/LinearRegression.py
       hash: md5
-      md5: a8c0ed18a0d26a42cc31e03423875bc5
-      size: 1686
+      md5: f4df42fb62c9e4bd50a80e6c866b24ba
+      size: 1736
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.LinearRegression:
           fit_intercept: true
@@ -71,32 +74,33 @@ stages:
     outs:
     - path: models/LinearRegression.pkl
       hash: md5
-      md5: b58e2bc07ef6b66cac9fc2d3eefea35a
+      md5: ffb38469a8f554b07fb8fa435b57c802
       size: 1081
     - path: reports/LinearRegression_coeff.json
       hash: md5
-      md5: b16df3d7eb20a1298d8385c713235816
-      size: 372
+      md5: 16b669fd357b43318ca166e959396d2a
+      size: 370
     - path: reports/images/LinearRegression_coefficients.png
       hash: md5
-      md5: 01a1b1e64fc5c206ef33f6bd9ed11450
-      size: 19108
+      md5: 57438280782d9461219bc2346496ca92
+      size: 19125
   DecisionTree:
     cmd: python src/models/DecisionTree.py
     deps:
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
     - path: src/models/DecisionTree.py
       hash: md5
-      md5: 7cdb983777756c7978331539dfe526eb
-      size: 1129
+      md5: beced8dd49950f44394b519b4d09a745
+      size: 1206
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DecisionTree:
           random_state: 42
@@ -110,28 +114,29 @@ stages:
     outs:
     - path: models/DecisionTree.pkl
       hash: md5
-      md5: 825bd8e3cdc9d6320f9df82e49dc1b43
-      size: 36289
+      md5: 48c71844f319de259151fe762dc57d1e
+      size: 35857
     - path: reports/images/DecisionTree_structure.png
       hash: md5
-      md5: 51217bbe9bdffd0fe5c56b542310f14d
-      size: 273925
+      md5: 6c403478ead45c78faf6301f54f6424c
+      size: 258747
   CatBoost:
     cmd: python src/models/CatBoost.py
     deps:
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
     - path: src/models/CatBoost.py
       hash: md5
-      md5: 1e1bc3ef4aabb65e035240cdd2ea33e6
-      size: 1152
+      md5: da7f7f1e69bf0edd9b275c7601aefae9
+      size: 1182
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.CatBoost:
           iterations: 775
@@ -142,28 +147,29 @@ stages:
     outs:
     - path: models/CatBoost.cbm
       hash: md5
-      md5: 17fd580db1dc0e02480196e1cab6f56c
-      size: 1034072
+      md5: 9464700f9c0f65e1847242458f39cddb
+      size: 1029688
     - path: reports/images/CatBoost_feature_importance.png
       hash: md5
-      md5: bdc998fd2f255105b176ba68ec84cc95
-      size: 7347
+      md5: aed29f4bc56487f057ac8811fd26535e
+      size: 7365
   XGBoost:
     cmd: python src/models/XGBoost.py
     deps:
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
     - path: src/models/XGBoost.py
       hash: md5
-      md5: dd6fd2ff30012261bdd8bca3ef48db6f
-      size: 1099
+      md5: 6e34038e94f7de8e17dbdcd35e357601
+      size: 1171
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.XGBoost:
           n_estimators: 610
@@ -173,28 +179,29 @@ stages:
     outs:
     - path: models/XGBoost.json
       hash: md5
-      md5: 35c748b7240af628e0579fcfd2071c05
-      size: 3416134
+      md5: 7c5c1a7f43a29ba5c9f977b11439d8af
+      size: 2932100
     - path: reports/images/XGBoost_feature_importance.png
       hash: md5
-      md5: 3c6db349d84b57b3c23617e3580170df
-      size: 8790
+      md5: c7d67b89eb56c10f47da444a2942eceb
+      size: 8791
   DenseNeuralNetwork:
     cmd: python src/models/DenseNeuralNetwork.py
     deps:
     - path: data/EDA_processed/train_data.csv
       hash: md5
-      md5: 13f35636f19057ec0facbdbd7b602c85
-      size: 293689
+      md5: 61697d5253496a4884975711c7813d2b
+      size: 220352
     - path: src/models/DenseNeuralNetwork.py
       hash: md5
-      md5: 64519910a5ecdf94b1befe821da47941
-      size: 5173
+      md5: e6f4fa682fdf2861261268afa2b6bcea
+      size: 5324
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DenseNeuralNetwork:
           dataset_params:
@@ -212,32 +219,32 @@ stages:
     outs:
     - path: models/DenseNeuralNetwork.keras
       hash: md5
-      md5: f95bbbe122eac4cd52c0066b1a38a487
+      md5: 7d1ca3a57e3d64ace98604a878993849
       size: 568961
     - path: reports/images/DenseNeuralNetwork_loss_curve.png
       hash: md5
-      md5: 3b00b773b14fe0be387595755a012fe6
-      size: 23219
+      md5: dbd514f422cd7b700c7a6dcc0e643ff1
+      size: 26892
     - path: reports/images/DenseNeuralNetwork_model_graph.png
       hash: md5
       md5: 2039f703afc94ff9fd8364875aeae753
       size: 581263
     - path: reports/images/DenseNeuralNetwork_weights_layer_1.png
       hash: md5
-      md5: 7ebdd596fe8cafb782e6d497ae8a2e3f
-      size: 18019
+      md5: 6ca6e13c2b71ef4dc14e3ef68b217293
+      size: 18489
     - path: reports/images/DenseNeuralNetwork_weights_layer_2.png
       hash: md5
-      md5: 1af9bb161b77ae20f0c3b80953a79452
-      size: 19107
+      md5: 49efbad18ee2291bb3b46feb1160186b
+      size: 20129
     - path: reports/images/DenseNeuralNetwork_weights_layer_3.png
       hash: md5
-      md5: 688c3c29a3dcfe0a2ab4a3c78c0f0621
-      size: 19137
+      md5: 08b8d592d0bdbe425d51328c1c877122
+      size: 18399
     - path: reports/images/DenseNeuralNetwork_weights_layer_4.png
       hash: md5
-      md5: 0f209b69c0fdd786c5d1d89dd5d219e7
-      size: 18002
+      md5: 1adbe9bb6ac968a738a5ab854bc70656
+      size: 19609
   test_LinearRegression:
     cmd: python src/test_models/test_LR.py
     deps:
@@ -247,17 +254,18 @@ stages:
       size: 73750
     - path: models/LinearRegression.pkl
       hash: md5
-      md5: b58e2bc07ef6b66cac9fc2d3eefea35a
+      md5: ffb38469a8f554b07fb8fa435b57c802
       size: 1081
     - path: src/test_models/test_LR.py
       hash: md5
-      md5: 30d273268d108c159887dea588745e74
-      size: 1906
+      md5: 7cb8368bb1221bf18da36620d1294d68
+      size: 2928
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.LinearRegression:
           fit_intercept: true
@@ -266,13 +274,13 @@ stages:
     outs:
     - path: dvclive/LinearRegression/metrics.json
       hash: md5
-      md5: a8d0b1659e236c73ec67a935e6c07721
-      size: 170
+      md5: 5e976056aedec92873302dff89522cc3
+      size: 498
     - path: dvclive/LinearRegression/plots
       hash: md5
-      md5: 696701e26421d954f89550d11e746abc.dir
-      size: 127
-      nfiles: 4
+      md5: d1eb039d0d238d21cfbbcd60913548bc.dir
+      size: 379
+      nfiles: 12
   test_DecisionTree:
     cmd: python src/test_models/test_DT.py
     deps:
@@ -282,17 +290,18 @@ stages:
       size: 73750
     - path: models/DecisionTree.pkl
       hash: md5
-      md5: 825bd8e3cdc9d6320f9df82e49dc1b43
-      size: 36289
+      md5: 48c71844f319de259151fe762dc57d1e
+      size: 35857
     - path: src/test_models/test_DT.py
       hash: md5
-      md5: d20421702ee562c34abb2b8fafa5a847
-      size: 1981
+      md5: a8fdf408a11ca39795e15c1838957d90
+      size: 2848
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DecisionTree:
           random_state: 42
@@ -306,13 +315,13 @@ stages:
     outs:
     - path: dvclive/DecisionTree/metrics.json
       hash: md5
-      md5: 3e6255bc0409554cefd27e96134cd300
-      size: 170
+      md5: f1c6f0e2e84b4f30445daa674db291d3
+      size: 499
     - path: dvclive/DecisionTree/plots
       hash: md5
-      md5: b01a66c44010eda869b20a31dc0b9e7d.dir
-      size: 127
-      nfiles: 4
+      md5: 6040db1b0c5db69b888d6982ddfdcfc4.dir
+      size: 380
+      nfiles: 12
   test_CatBoost:
     cmd: python src/test_models/test_CB.py
     deps:
@@ -322,17 +331,18 @@ stages:
       size: 73750
     - path: models/CatBoost.cbm
       hash: md5
-      md5: 17fd580db1dc0e02480196e1cab6f56c
-      size: 1034072
+      md5: 9464700f9c0f65e1847242458f39cddb
+      size: 1029688
     - path: src/test_models/test_CB.py
       hash: md5
-      md5: a980cbe583cacffbdd8419c08696a465
-      size: 1969
+      md5: 31299babf04295183b13f3055367482e
+      size: 2953
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.CatBoost:
           iterations: 775
@@ -343,13 +353,13 @@ stages:
     outs:
     - path: dvclive/CatBoost/metrics.json
       hash: md5
-      md5: 49e9007bc9988a413d2ef9fcc5cbb25b
-      size: 171
+      md5: 0fca4a608337d33113288bf651f58fcf
+      size: 502
     - path: dvclive/CatBoost/plots
       hash: md5
-      md5: 0a1ea53e71de4c01ef69f6589c97af0e.dir
-      size: 128
-      nfiles: 4
+      md5: 209cfee6596d56ed5ac729726009f61a.dir
+      size: 383
+      nfiles: 12
   test_XGBoost:
     cmd: python src/test_models/test_XGB.py
     deps:
@@ -359,17 +369,18 @@ stages:
       size: 73750
     - path: models/XGBoost.json
       hash: md5
-      md5: 35c748b7240af628e0579fcfd2071c05
-      size: 3416134
+      md5: 7c5c1a7f43a29ba5c9f977b11439d8af
+      size: 2932100
     - path: src/test_models/test_XGB.py
       hash: md5
-      md5: 20ac7d969edcb3e74dc6cbe8e2543a6d
-      size: 1956
+      md5: ceed2227b946d5985d2cc6d1187bfe89
+      size: 2940
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.XGBoost:
           n_estimators: 610
@@ -379,13 +390,13 @@ stages:
     outs:
     - path: dvclive/XGBoost/metrics.json
       hash: md5
-      md5: bf0cba271b699a913bd701a05757de55
-      size: 169
+      md5: d839f6aead0530fdf1c31402e69f16e9
+      size: 504
     - path: dvclive/XGBoost/plots
       hash: md5
-      md5: 2926148db4f678320e717774f11000dc.dir
-      size: 126
-      nfiles: 4
+      md5: 82b40ed8841fad9576871a59a82f01e2.dir
+      size: 385
+      nfiles: 12
   test_DenseNeuralNetwork:
     cmd: python src/test_models/test_DNN.py
     deps:
@@ -395,17 +406,18 @@ stages:
       size: 73750
     - path: models/DenseNeuralNetwork.keras
       hash: md5
-      md5: f95bbbe122eac4cd52c0066b1a38a487
+      md5: 7d1ca3a57e3d64ace98604a878993849
       size: 568961
     - path: src/test_models/test_DNN.py
       hash: md5
-      md5: 6df0f85127345b78f1ca6757f3d36c25
-      size: 1975
+      md5: e532587e55df7a9bdecc9f9844a209e8
+      size: 2985
     params:
       config/parameters.yaml:
         base:
           random_state: 42
           test_size: 0.2
+          val_size: 0.25
           root_project_dir: C:/ML_Labs/LB1_2_ML_Yakushev
         models.DenseNeuralNetwork:
           dataset_params:
@@ -423,10 +435,10 @@ stages:
     outs:
     - path: dvclive/DenseNeuralNetwork/metrics.json
       hash: md5
-      md5: 4c2d4f712d34b6b3b1275a5d7772e68d
-      size: 169
+      md5: 0d2ce41b3c468329b70aea649ae43eb0
+      size: 500
     - path: dvclive/DenseNeuralNetwork/plots
       hash: md5
-      md5: 43857667b99c6b1dd975be248ff29e83.dir
-      size: 126
-      nfiles: 4
+      md5: e135151c5873eee9369f65669896752e.dir
+      size: 381
+      nfiles: 12
